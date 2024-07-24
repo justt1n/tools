@@ -1,4 +1,4 @@
-import subprocess
+import json
 from os import listdir
 from os.path import isfile, join
 
@@ -46,24 +46,23 @@ https://download850.mediafire.com/bklb5ccdgvng53pgDe5kGZDdL-5wcdRwRvTSHxz7eSSRvb
 https://download1336.mediafire.com/96rhwzxl6jpgZRaR9NVpEaJ9ayEECXgYHkpYIr42QidI83TEQUlcYCXM3PAdfL1ZyV3FTQkbyrf25iewEO7zo4jMJQILHlYMyGXfrU7JNeRXACPRkR1Lo1tm1DVPBKU_jIutTNw5wFfDaT9NqWvSeDCvaBqiTkoV61uOIPaTZn4Ntdk/clnzkkhoicb3f1e/Umeko+J+-+Yuzuriha+%28Jigokuraku%29+%28Video%29+%28mitaku.net%29.rar,
 """
 
-#read string from txt file
+#read string from txt file and split by comma
 def readStringFromFile(fileName):
-    with open(fileName, "r") as file:
-        return file.read()
+    with open(fileName, 'r') as f:
+        return f.read().split(',')
 
-#write string to txt file
-def writeStringToFile(fileName, str):
+#write list to txt file
+def writeListToFile(fileName, lst):
     with open(fileName, "w") as file:
-        file.write(str)
+        json.dump(lst, file)
 
 #read all tmp*.txt files then split by comma and write to final*.txt
 def readTmpFilesAndWriteToFinalFile():
-    finalStr = ""
     #find all tmp*.txt files in current path
-    files = [f for f in listdir(".") if isfile(join(".", f)) and f.startswith("tmp") and f.endswith(".txt")]
+    files = [f for f in listdir(".") if isfile(join(".", f)) and f.endswith(".txt")]
 
     for i in files:
-        finalStr += readStringFromFile(i).split(",")
-    writeStringToFile("final.txt", finalStr)
+        finalList = readStringFromFile(i)
+        writeListToFile(f"{i}_final.txt", finalList)
 
 readTmpFilesAndWriteToFinalFile()
