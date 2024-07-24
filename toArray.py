@@ -46,15 +46,18 @@ https://download850.mediafire.com/bklb5ccdgvng53pgDe5kGZDdL-5wcdRwRvTSHxz7eSSRvb
 https://download1336.mediafire.com/96rhwzxl6jpgZRaR9NVpEaJ9ayEECXgYHkpYIr42QidI83TEQUlcYCXM3PAdfL1ZyV3FTQkbyrf25iewEO7zo4jMJQILHlYMyGXfrU7JNeRXACPRkR1Lo1tm1DVPBKU_jIutTNw5wFfDaT9NqWvSeDCvaBqiTkoV61uOIPaTZn4Ntdk/clnzkkhoicb3f1e/Umeko+J+-+Yuzuriha+%28Jigokuraku%29+%28Video%29+%28mitaku.net%29.rar,
 """
 
+
 #read string from txt file and split by comma
 def readStringFromFile(fileName):
     with open(fileName, 'r') as f:
         return f.read().split(',')
 
+
 #write list to txt file
 def writeListToFile(fileName, lst):
     with open(fileName, "w") as file:
         json.dump(lst, file)
+
 
 #read all tmp*.txt files then split by comma and write to final*.txt
 def readTmpFilesAndWriteToFinalFile():
@@ -64,5 +67,6 @@ def readTmpFilesAndWriteToFinalFile():
     for i in files:
         finalList = readStringFromFile(i)
         writeListToFile(f"{i}_final.txt", finalList)
+
 
 readTmpFilesAndWriteToFinalFile()
